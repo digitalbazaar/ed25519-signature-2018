@@ -18,19 +18,18 @@ import {
   contexts,
 } from '@transmute/jsonld-document-loader';
 
+import * as ed25519 from 'ed25519-signature-2018-context';
+
 describe('Ed25519Signature2018', () => {
   let documentLoader;
 
   before(async () => {
-    const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
-    const publicKey = await keyPair.export({publicKey: true});
-    controllerDoc.publicKey.push(publicKey);
-
     documentLoader = documentLoaderFactory.pluginFactory
       .build({
         contexts: {
           ...contexts.W3C_Verifiable_Credentials,
-          ...contexts.W3ID_Security_Vocabulary
+          'https://w3id.org/security/ed25519-signature-2018/v1': ed25519
+            .contexts.get('https://w3id.org/security/ed25519-signature-2018/v1')
         }
       })
       .addContext({
@@ -91,7 +90,7 @@ describe('Ed25519Signature2018', () => {
         documentLoader
       });
 
-      console.log(result);
+      expect(result.verified).to.be.true;
     });
   });
 });
