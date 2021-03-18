@@ -37,7 +37,7 @@
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "cross-env": "^7.0.2",
-    "ed25519-signature-2018-context": "digitalbazaar/ed25519-signature-2018-context#v1.0.0",
+    "ed25519-signature-2018-context": "^1.0.0",
     "eslint": "^7.6.0",
     "eslint-config-digitalbazaar": "^2.5.0",
     "eslint-plugin-jsdoc": "^30.2.0",
@@ -78,7 +78,7 @@
   "scripts": {
     "test": "npm run lint && npm run test-node && npm run test-karma",
     "test-karma": "karma start karma.conf.js",
-    "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 30000 -A -R ${REPORTER:-spec} --require test/*.spec.js",
+    "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 30000 -R ${REPORTER:-spec} test/*.spec.js",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary npm run test-node",
     "coverage-ci": "cross-env NODE_ENV=test nyc --reporter=lcovonly npm run test-node",
     "coverage-report": "nyc report",
