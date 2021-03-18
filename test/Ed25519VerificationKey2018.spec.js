@@ -28,8 +28,8 @@ describe('Ed25519Signature2018', () => {
       .build({
         contexts: {
           ...contexts.W3C_Verifiable_Credentials,
-          'https://w3id.org/security/ed25519-signature-2018/v1': ed25519
-            .contexts.get('https://w3id.org/security/ed25519-signature-2018/v1')
+          'https://w3id.org/security/suites/ed25519-2018/v1': ed25519
+            .contexts.get('https://w3id.org/security/suites/ed25519-2018/v1')
         }
       })
       .addContext({
@@ -62,6 +62,25 @@ describe('Ed25519Signature2018', () => {
         // eslint-disable-next-line max-len
         .equal('eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..AWYaAOHSfWc8lJzYnyJOEGFpeM1mo7Dh3ZfFAPypAR4gpE57i0xVvSMISIqxQQEKA46YhF-v8Yl3Pj-FXM0tBA');
     });
+
+    it('should throw error if "signer" is not specified', async () => {
+      const unsignedCredential = {...credential};
+      const suite = new Ed25519Signature2018();
+      let signedCredential;
+      let err;
+      try {
+        signedCredential = await jsigs.sign(unsignedCredential, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          documentLoader
+        });
+      } catch(e) {
+        err = e;
+      }
+      expect(signedCredential).to.equal(undefined);
+      expect(err.name).to.equal('Error');
+      expect(err.message).to.equal('A signer API has not been specified.');
+    });
   });
 
   describe('verify()', () => {
@@ -92,5 +111,77 @@ describe('Ed25519Signature2018', () => {
 
       expect(result.verified).to.be.true;
     });
+
+    it('should fail verification if "jws" is not string', async () => {
+      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
+      const suite = new Ed25519Signature2018({key: keyPair});
+      const signedCredentialCopy =
+        JSON.parse(JSON.stringify(signedCredential));
+      // intentionally modify proofValue type to not be string
+      signedCredentialCopy.proof.jws = {};
+
+      const result = await jsigs.verify(signedCredentialCopy, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        compactProof: false,
+        documentLoader
+      });
+
+      const {error} = result.results[0];
+      expect(result.verified).to.be.false;
+      expect(error.name).to.equal('TypeError');
+      expect(error.message).to.equal(
+        'The proof does not include a valid "jws" property.'
+      );
+    });
+
+    it('should fail verification if "proofValue" is not given', async () => {
+      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
+      const suite = new Ed25519Signature2018({key: keyPair});
+      const signedCredentialCopy =
+        JSON.parse(JSON.stringify(signedCredential));
+      // intentionally modify proofValue to be undefined
+      signedCredentialCopy.proof.jws = undefined;
+
+      const result = await jsigs.verify(signedCredentialCopy, {
+        suite,
+        purpose: new AssertionProofPurpose(),
+        compactProof: false,
+        documentLoader
+      });
+
+      const {error} = result.results[0];
+
+      expect(result.verified).to.be.false;
+      expect(error.name).to.equal('TypeError');
+      expect(error.message).to.equal(
+        'The proof does not include a valid "jws" property.'
+      );
+    });
+
+    it('should fail verification if proof type is not Ed25519Signature2018',
+      async () => {
+        const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
+        const suite = new Ed25519Signature2018({key: keyPair});
+        const signedCredentialCopy =
+          JSON.parse(JSON.stringify(signedCredential));
+        // intentionally modify proof type to be Ed25519Signature2020
+        signedCredentialCopy.proof.type = 'Ed25519Signature2020';
+
+        const result = await jsigs.verify(signedCredentialCopy, {
+          suite,
+          purpose: new AssertionProofPurpose(),
+          compactProof: false,
+          documentLoader
+        });
+
+        const {errors} = result.error;
+
+        expect(result.verified).to.be.false;
+        expect(errors[0].name).to.equal('Error');
+        expect(errors[0].message).to.equal(
+          'Could not verify any proofs; no proofs matched the required ' +
+          'suite and purpose.');
+      });
   });
 });
