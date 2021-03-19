@@ -124,7 +124,6 @@ describe('Ed25519Signature2018', () => {
       const result = await jsigs.verify(signedCredentialCopy, {
         suite,
         purpose: new AssertionProofPurpose(),
-        compactProof: false,
         documentLoader
       });
 
@@ -146,7 +145,6 @@ describe('Ed25519Signature2018', () => {
       const result = await jsigs.verify(signedCredentialCopy, {
         suite,
         purpose: new AssertionProofPurpose(),
-        compactProof: false,
         documentLoader
       });
 
@@ -161,8 +159,7 @@ describe('Ed25519Signature2018', () => {
 
     it('should fail verification if proof type is not Ed25519Signature2018',
       async () => {
-        const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
-        const suite = new Ed25519Signature2018({key: keyPair});
+        const suite = new Ed25519Signature2018();
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
         // intentionally modify proof type to be Ed25519Signature2020
@@ -171,7 +168,6 @@ describe('Ed25519Signature2018', () => {
         const result = await jsigs.verify(signedCredentialCopy, {
           suite,
           purpose: new AssertionProofPurpose(),
-          compactProof: false,
           documentLoader
         });
 
