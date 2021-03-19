@@ -3,6 +3,17 @@
  */
 export const controller = 'https://example.edu/issuers/565049';
 
+export const mockPublicKey = {
+  '@context': [
+    'https://w3id.org/security/v2'
+  ],
+  // eslint-disable-next-line max-len
+  id: 'https://example.edu/issuers/565049#z6MkjLrk3gKS2nnkeWcmcxiZPGskmesDpuwRBorgHxUXfxnG',
+  type: 'Ed25519VerificationKey2018',
+  controller: 'https://example.edu/issuers/565049',
+  publicKeyBase58: 'GycSSui454dpYRKiFdsQ5uaE8Gy3ac6dSMPcAoQsk8yq'
+};
+
 export const mockKey = {
   type: 'Ed25519VerificationKey2018',
   controller,
@@ -18,7 +29,7 @@ export const controllerDoc = {
     'https://w3id.org/security/v2'
   ],
   id: 'https://example.edu/issuers/565049',
-  assertionMethod: [mockKey.id]
+  assertionMethod: [mockPublicKey]
 };
 
 export const credential = {

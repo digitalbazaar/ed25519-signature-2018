@@ -11,7 +11,9 @@ const {purposes: {AssertionProofPurpose}} = jsigs;
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
 import {Ed25519Signature2018} from '../';
-import {credential, mockKey, controllerDoc} from './mock-data.js';
+import {
+  credential, mockPublicKey, mockKey, controllerDoc
+} from './mock-data.js';
 
 import {
   documentLoaderFactory,
@@ -33,7 +35,8 @@ describe('Ed25519Signature2018', () => {
         }
       })
       .addContext({
-        [mockKey.controller]: controllerDoc
+        [mockKey.controller]: controllerDoc,
+        [mockPublicKey.id]: mockPublicKey
       })
       .buildDocumentLoader();
   });
@@ -44,7 +47,7 @@ describe('Ed25519Signature2018', () => {
     });
   });
 
-  describe('sign() and verify()', () => {
+  describe('sign()', () => {
     it('should sign a document', async () => {
       const unsignedCredential = {...credential};
       const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
@@ -100,8 +103,7 @@ describe('Ed25519Signature2018', () => {
     });
 
     it('should verify a document', async () => {
-      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
-      const suite = new Ed25519Signature2018({key: keyPair});
+      const suite = new Ed25519Signature2018();
 
       const result = await jsigs.verify(signedCredential, {
         suite,
@@ -113,8 +115,7 @@ describe('Ed25519Signature2018', () => {
     });
 
     it('should fail verification if "jws" is not string', async () => {
-      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
-      const suite = new Ed25519Signature2018({key: keyPair});
+      const suite = new Ed25519Signature2018();
       const signedCredentialCopy =
         JSON.parse(JSON.stringify(signedCredential));
       // intentionally modify proofValue type to not be string
@@ -136,8 +137,7 @@ describe('Ed25519Signature2018', () => {
     });
 
     it('should fail verification if "proofValue" is not given', async () => {
-      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
-      const suite = new Ed25519Signature2018({key: keyPair});
+      const suite = new Ed25519Signature2018();
       const signedCredentialCopy =
         JSON.parse(JSON.stringify(signedCredential));
       // intentionally modify proofValue to be undefined
