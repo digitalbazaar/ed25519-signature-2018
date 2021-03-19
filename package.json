@@ -24,7 +24,7 @@
   "module": "lib/main.js",
   "dependencies": {
     "@digitalbazaar/ed25519-verification-key-2018": "^3.0.0",
-    "@digitalbazaar/jws-linked-data-signature": "digitalbazaar/jws-linked-data-signature#initial",
+    "@digitalbazaar/jws-linked-data-signature": "^1.0.0",
     "esm": "^3.2.25"
   },
   "devDependencies": {
@@ -72,7 +72,7 @@
   "scripts": {
     "test": "npm run lint && npm run test-node && npm run test-karma",
     "test-karma": "karma start karma.conf.js",
-    "test-node": "cross-env NODE_ENV=test mocha -b -r esm --preserve-symlinks -t 30000 -R ${REPORTER:-spec} test/*.spec.js",
+    "test-node": "cross-env NODE_ENV=test mocha -r esm --preserve-symlinks -t 30000 -R ${REPORTER:-spec} test/*.spec.js",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary npm run test-node",
     "coverage-ci": "cross-env NODE_ENV=test nyc --reporter=lcovonly npm run test-node",
     "coverage-report": "nyc report",
