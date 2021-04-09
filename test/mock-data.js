@@ -5,7 +5,7 @@ export const controller = 'https://example.edu/issuers/565049';
 
 export const mockPublicKey = {
   '@context': [
-    'https://w3id.org/security/v2'
+    'https://w3id.org/security/suites/ed25519-2018/v1'
   ],
   // eslint-disable-next-line max-len
   id: 'https://example.edu/issuers/565049#z6MkjLrk3gKS2nnkeWcmcxiZPGskmesDpuwRBorgHxUXfxnG',
@@ -14,7 +14,7 @@ export const mockPublicKey = {
   publicKeyBase58: 'GycSSui454dpYRKiFdsQ5uaE8Gy3ac6dSMPcAoQsk8yq'
 };
 
-export const mockKey = {
+export const mockKeyPair = {
   type: 'Ed25519VerificationKey2018',
   controller,
   id: controller + '#z6MkjLrk3gKS2nnkeWcmcxiZPGskmesDpuwRBorgHxUXfxnG',
@@ -26,7 +26,8 @@ export const mockKey = {
 
 export const controllerDoc = {
   '@context': [
-    'https://w3id.org/security/v2'
+    'https://www.w3.org/ns/did/v1',
+    'https://w3id.org/security/suites/ed25519-2018/v1'
   ],
   id: 'https://example.edu/issuers/565049',
   assertionMethod: [mockPublicKey]
@@ -35,7 +36,8 @@ export const controllerDoc = {
 export const credential = {
   '@context': [
     'https://www.w3.org/2018/credentials/v1',
-    'https://www.w3.org/2018/credentials/examples/v1'
+    'https://www.w3.org/2018/credentials/examples/v1',
+    'https://w3id.org/security/suites/ed25519-2018/v1'
   ],
   id: 'http://example.edu/credentials/1872',
   type: ['VerifiableCredential', 'AlumniCredential'],

@@ -10,10 +10,12 @@ const {purposes: {AssertionProofPurpose}} = jsigs;
 
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {Ed25519Signature2018} from '../';
+import {Ed25519Signature2018, suiteContext} from '../';
 import {
-  credential, mockPublicKey, mockKey, controllerDoc
+  credential, mockPublicKey, mockKeyPair, controllerDoc
 } from './mock-data.js';
+
+import didContext from 'did-context';
 
 import {
   documentLoaderFactory,
@@ -35,22 +37,37 @@ describe('Ed25519Signature2018', () => {
         }
       })
       .addContext({
-        [mockKey.controller]: controllerDoc,
-        [mockPublicKey.id]: mockPublicKey
+        [mockKeyPair.controller]: controllerDoc,
+        [mockPublicKey.id]: mockPublicKey,
+        [didContext.constants.DID_CONTEXT_URL]: didContext
+          .contexts.get('https://www.w3.org/ns/did/v1')
       })
       .buildDocumentLoader();
   });
 
   describe('constructor', () => {
     it('should exist', async () => {
-      Ed25519Signature2018.should.exist;
+      should.exist(Ed25519Signature2018);
+      should.exist(suiteContext);
+      suiteContext.should.have.keys([
+        'appContextMap',
+        'constants',
+        'contexts',
+        'documentLoader',
+      ]);
+      should.exist(Ed25519Signature2018.CONTEXT_URL);
+      Ed25519Signature2018.CONTEXT_URL.should
+        .equal(suiteContext.constants.CONTEXT_URL);
+      const context = Ed25519Signature2018.CONTEXT;
+      context.should.exist;
+      context['@context'].id.should.equal('@id');
     });
   });
 
   describe('sign()', () => {
     it('should sign a document', async () => {
       const unsignedCredential = {...credential};
-      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
+      const keyPair = await Ed25519VerificationKey2018.from({...mockKeyPair});
       const suite = new Ed25519Signature2018({key: keyPair});
       suite.date = '2010-01-01T19:23:24Z';
 
@@ -86,12 +103,12 @@ describe('Ed25519Signature2018', () => {
     });
   });
 
-  describe('verify()', () => {
+  describe.only('verify()', () => {
     let signedCredential;
 
     before(async () => {
       const unsignedCredential = {...credential};
-      const keyPair = await Ed25519VerificationKey2018.from({...mockKey});
+      const keyPair = await Ed25519VerificationKey2018.from({...mockKeyPair});
       const suite = new Ed25519Signature2018({key: keyPair});
       suite.date = '2010-01-01T19:23:24Z';
 
@@ -162,8 +179,8 @@ describe('Ed25519Signature2018', () => {
         const suite = new Ed25519Signature2018();
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
-        // intentionally modify proof type to be Ed25519Signature2020
-        signedCredentialCopy.proof.type = 'Ed25519Signature2020';
+        // intentionally modify proof type to be Ed25519Signature2018
+        signedCredentialCopy.proof.type = 'Ed25519Signature2018';
 
         const result = await jsigs.verify(signedCredentialCopy, {
           suite,
