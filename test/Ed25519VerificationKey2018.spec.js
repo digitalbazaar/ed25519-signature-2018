@@ -47,17 +47,16 @@ describe('Ed25519Signature2018', () => {
 
   describe('constructor', () => {
     it('should exist', async () => {
-      should.exist(Ed25519Signature2018);
-      should.exist(suiteContext);
+      expect(Ed25519Signature2018).to.exist;
+      expect(suiteContext).to.exist;
       suiteContext.should.have.keys([
         'appContextMap',
         'constants',
         'contexts',
         'documentLoader',
       ]);
-      should.exist(Ed25519Signature2018.CONTEXT_URL);
-      Ed25519Signature2018.CONTEXT_URL.should
-        .equal(suiteContext.constants.CONTEXT_URL);
+      expect(Ed25519Signature2018).to.have
+        .property('CONTEXT_URL', suiteContext.constants.CONTEXT_URL);
       const context = Ed25519Signature2018.CONTEXT;
       context.should.exist;
       context['@context'].id.should.equal('@id');
@@ -103,7 +102,7 @@ describe('Ed25519Signature2018', () => {
     });
   });
 
-  describe.only('verify()', () => {
+  describe('verify()', () => {
     let signedCredential;
 
     before(async () => {
@@ -179,8 +178,8 @@ describe('Ed25519Signature2018', () => {
         const suite = new Ed25519Signature2018();
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
-        // intentionally modify proof type to be Ed25519Signature2018
-        signedCredentialCopy.proof.type = 'Ed25519Signature2018';
+        // intentionally modify proof type to be Ed25519Signature2020
+        signedCredentialCopy.proof.type = 'Ed25519Signature2020';
 
         const result = await jsigs.verify(signedCredentialCopy, {
           suite,
@@ -188,6 +187,7 @@ describe('Ed25519Signature2018', () => {
           documentLoader
         });
 
+        expect(result.error).to.exist;
         const {errors} = result.error;
 
         expect(result.verified).to.be.false;
