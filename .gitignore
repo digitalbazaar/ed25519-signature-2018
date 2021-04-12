@@ -106,3 +106,5 @@ dist
 # Editor files
 *~
 *.sw[nop]
+
+.vscode
