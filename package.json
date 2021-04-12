@@ -25,7 +25,8 @@
   "dependencies": {
     "@digitalbazaar/ed25519-verification-key-2018": "^3.1.1",
     "@digitalbazaar/jws-linked-data-signature": "digitalbazaar/jws-linked-data-signature#jsigs-9",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "jsonld": "^5.2.0"
   },
   "devDependencies": {
     "@transmute/jsonld-document-loader": "^0.2.0",
