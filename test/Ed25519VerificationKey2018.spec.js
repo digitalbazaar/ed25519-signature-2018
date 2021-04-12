@@ -10,7 +10,7 @@ const {purposes: {AssertionProofPurpose}} = jsigs;
 
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {Ed25519Signature2018, suiteContext} from '../';
+import {Ed25519Signature2018, suiteContext} from '..';
 import {
   credential, mockPublicKey, mockKeyPair, controllerDoc
 } from './mock-data.js';
