@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
-## 2.0.1 - TBD
+## 2.0.1 - 2021-04-15
 
 ### Fixed
 - Make `ed25519-signature-2018-context` a regular dependency.
