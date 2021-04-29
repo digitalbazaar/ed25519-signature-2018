@@ -24,7 +24,7 @@
   "module": "lib/main.js",
   "dependencies": {
     "@digitalbazaar/ed25519-verification-key-2018": "^3.0.0",
-    "@digitalbazaar/jws-linked-data-signature": "^1.0.0",
+    "@digitalbazaar/jws-linked-data-signature": "1.0.0",
     "esm": "^3.2.25"
   },
   "devDependencies": {
