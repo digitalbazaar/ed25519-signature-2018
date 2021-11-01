@@ -32,6 +32,7 @@
   "devDependencies": {
     "@transmute/jsonld-document-loader": "^0.2.0",
     "chai": "^4.2.0",
+    "credentials-context": "^2.0.0",
     "cross-env": "^7.0.2",
     "did-context": "^3.0.0",
     "eslint": "^7.6.0",
