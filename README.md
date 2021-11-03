@@ -37,6 +37,15 @@ cd ed25519-signature-2018
 npm install
 ```
 
+## Tests
+
+```
+npm run test
+```
+
+Note: To run tests for karma, you will need to have Google Chrome installed,
+or otherwise set `CHROME_BIN` environment variable to Chromium. 
+
 ## Usage
 
 TBD
