@@ -12,9 +12,12 @@ import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
 import {Ed25519Signature2018, suiteContext} from '..';
 import {
-  credential, mockPublicKey, mockKeyPair, controllerDoc
+  credential, mockKeyPair
 } from './mock-data.js';
+import documentLoader from './documentLoader';
 
+/*
+mockPublicKey, controllerDoc
 import didContext from 'did-context';
 
 import {
@@ -23,43 +26,31 @@ import {
 } from '@transmute/jsonld-document-loader';
 
 import * as ed25519 from 'ed25519-signature-2018-context';
+*/
 
 describe('Ed25519Signature2018', () => {
-  let documentLoader;
-
-  before(async () => {
-    documentLoader = documentLoaderFactory.pluginFactory
-      .build({
-        contexts: {
-          ...contexts.W3C_Verifiable_Credentials,
-          'https://w3id.org/security/suites/ed25519-2018/v1': ed25519
-            .contexts.get('https://w3id.org/security/suites/ed25519-2018/v1')
-        }
-      })
-      .addContext({
-        [mockKeyPair.controller]: controllerDoc,
-        [mockPublicKey.id]: mockPublicKey,
-        [didContext.constants.DID_CONTEXT_URL]: didContext
-          .contexts.get('https://www.w3.org/ns/did/v1')
-      })
-      .buildDocumentLoader();
-  });
 
   describe('constructor', () => {
     it('should exist', async () => {
       expect(Ed25519Signature2018).to.exist;
       expect(suiteContext).to.exist;
+
       suiteContext.should.have.keys([
-        'appContextMap',
         'constants',
         'contexts',
+        'appContextMap',
         'documentLoader',
+        'CONTEXT_URL',
+        'CONTEXT',
       ]);
+
       expect(Ed25519Signature2018).to.have
         .property('CONTEXT_URL', suiteContext.constants.CONTEXT_URL);
+
       const context = Ed25519Signature2018.CONTEXT;
       context.should.exist;
       context['@context'].id.should.equal('@id');
+
     });
   });
 
@@ -96,6 +87,7 @@ describe('Ed25519Signature2018', () => {
       } catch(e) {
         err = e;
       }
+
       expect(signedCredential).to.equal(undefined);
       expect(err.name).to.equal('Error');
       expect(err.message).to.equal('A signer API has not been specified.');
@@ -178,6 +170,7 @@ describe('Ed25519Signature2018', () => {
         const suite = new Ed25519Signature2018();
         const signedCredentialCopy =
           JSON.parse(JSON.stringify(signedCredential));
+
         // intentionally modify proof type to be Ed25519Signature2020
         signedCredentialCopy.proof.type = 'Ed25519Signature2020';
 
@@ -191,10 +184,11 @@ describe('Ed25519Signature2018', () => {
         const {errors} = result.error;
 
         expect(result.verified).to.be.false;
-        expect(errors[0].name).to.equal('Error');
-        expect(errors[0].message).to.equal(
-          'Could not verify any proofs; no proofs matched the required ' +
-          'suite and purpose.');
+        expect(errors[0].name).to.equal('NotFoundError');
+        expect(errors[0].message).to
+        // eslint-disable-next-line max-len
+          .equal('Did not verify any proofs; insufficient proofs matched the acceptable suite(s) and required purpose(s).');
+
       });
   });
 });
