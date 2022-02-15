@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
-## 2.1.0 - 2021-11-xx
+## 2.1.0 - 2022-02-15
 
 ### Added
 - Add compatability for 2020 keys.
