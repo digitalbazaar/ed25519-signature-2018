@@ -73,7 +73,7 @@
     "Linked Data"
   ],
   "scripts": {
-    "test": "npm run lint && npm run test-node && npm run test-karma",
+    "test": "npm run test-node",
     "test-karma": "karma start test/karma.conf.cjs",
     "test-node": "cross-env NODE_ENV=test mocha --preserve-symlinks -t 30000 -R ${REPORTER:-spec} test/*.spec.js",
     "coverage": "cross-env NODE_ENV=test c8 npm run test-node",
