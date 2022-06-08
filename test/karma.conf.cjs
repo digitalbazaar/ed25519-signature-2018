@@ -1,7 +1,6 @@
 module.exports = function(config) {
-  const bundler = process.env.BUNDLER || 'webpack';
   const frameworks = ['mocha', 'chai'];
-
+  const preprocessors = ['webpack', 'sourcemap'];
   const files = ['*.spec.js'];
 
   // browser launchers: https://npmjs.org/browse/keyword/karma-launcher
@@ -16,11 +15,6 @@ module.exports = function(config) {
       //delay: true
     }
   };
-
-  // main bundle preprocessors
-  const preprocessors = [];
-  preprocessors.push(bundler);
-  preprocessors.push('sourcemap');
 
   return config.set({
     frameworks,
@@ -52,12 +46,7 @@ module.exports = function(config) {
 
     webpack: {
       devtool: 'inline-source-map',
-      mode: 'development',
-      resolve: {
-        fallback: {
-          crypto: false,
-        }
-      },
+      mode: 'development'
     }
   });
 };
