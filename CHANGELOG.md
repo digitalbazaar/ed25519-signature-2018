@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
-## 3.0.0 - 2022-xx-xx
+## 3.0.0 - 2022-06-07
 
 ### Changed
 - **BREAKING**: Convert to module (ESM).
