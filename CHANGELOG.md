@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
-## 4.0.0 - 2022-10-xx
+## 4.0.0 - 2022-10-25
 
 ### Changed
 - **BREAKING**: Use `jsonld@8` and `jws-linked-data-signature@3`
