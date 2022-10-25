@@ -70,7 +70,7 @@ describe('Ed25519Signature2018', () => {
       expect(signedCredential).to.have.property('proof');
       expect(signedCredential.proof.jws).to
         // eslint-disable-next-line max-len
-        .equal('eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..AWYaAOHSfWc8lJzYnyJOEGFpeM1mo7Dh3ZfFAPypAR4gpE57i0xVvSMISIqxQQEKA46YhF-v8Yl3Pj-FXM0tBA');
+        .equal('eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..5MPoYFmFjaIAqgGnFDhRRaLrXJ1dMnzOO2wJRyngXhd39DyBA9ga1Pted_0WD1t_jHklX1eKvPCmM3xe3JIlDQ');
     });
 
     it('should throw error if "signer" is not specified', async () => {
