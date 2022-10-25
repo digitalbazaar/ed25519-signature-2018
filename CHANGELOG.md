@@ -1,5 +1,11 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
+## 4.0.0 - 2022-10-xx
+
+### Changed
+- **BREAKING**: Use `jsonld@8` and `jws-linked-data-signature@3`
+  to get better safe mode protections when canonizing.
+
 ## 3.0.0 - 2022-06-07
 
 ### Changed
