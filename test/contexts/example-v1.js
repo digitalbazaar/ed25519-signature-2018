@@ -23,6 +23,9 @@ contexts.set(constants.CONTEXT_URL, {
     "Mother": "ex:Mother",
     "RelationshipCredential": "ex:RelationshipCredential",
     "UniversityDegreeCredential": "ex:UniversityDegreeCredential",
+    "AlumniCredential": "ex:AlumniCredential",
+    "DisputeCredential": "ex:DisputeCredential",
+    "PrescriptionCredential": "ex:PrescriptionCredential",
     "ZkpExampleSchema2018": "ex:ZkpExampleSchema2018",
 
     "issuerData": "ex:issuerData",
@@ -47,7 +50,10 @@ contexts.set(constants.CONTEXT_URL, {
     "evidenceDocument": "ex:evidenceDocument",
     "spouse": "schema:spouse",
     "subjectPresence": "ex:subjectPresence",
-    "verifier": {"@id": "ex:verifier", "@type": "@id"}
+    "verifier": {"@id": "ex:verifier", "@type": "@id"},
+    "currentStatus": "ex:currentStatus",
+    "statusReason": "ex:statusReason",
+    "prescription": "ex:prescription"
   }]
 });
 /* eslint-enable */
