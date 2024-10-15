@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021-2024 Digital Bazaar, Inc. All rights reserved.
  */
 import chai from 'chai';
 chai.should();
@@ -8,13 +8,11 @@ const {expect} = chai;
 import jsigs from 'jsonld-signatures';
 const {purposes: {AssertionProofPurpose}} = jsigs;
 
+import {credential, mockKeyPair} from './mock-data.js';
+import {Ed25519Signature2018, suiteContext} from '../lib/index.js';
+import documentLoader from './documentLoader.js';
 import {Ed25519VerificationKey2018} from
   '@digitalbazaar/ed25519-verification-key-2018';
-import {Ed25519Signature2018, suiteContext} from '../lib/index.js';
-import {
-  credential, mockKeyPair
-} from './mock-data.js';
-import documentLoader from './documentLoader.js';
 
 /*
 mockPublicKey, controllerDoc
