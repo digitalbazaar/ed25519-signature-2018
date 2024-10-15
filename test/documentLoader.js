@@ -1,12 +1,10 @@
-import didContext from 'did-context';
 import * as ed25519 from 'ed25519-signature-2018-context';
 import * as exampleV1 from './contexts/example-v1.js';
 import * as odrlV1 from './contexts/odrl-v1.js';
-import {
-  mockPublicKey, controllerDoc
-} from './mock-data.js';
+import {controllerDoc, mockPublicKey} from './mock-data.js';
 
 import credentialsContext from 'credentials-context';
+import didContext from 'did-context';
 
 const context = {
   [didContext.constants.DID_CONTEXT_URL]: //

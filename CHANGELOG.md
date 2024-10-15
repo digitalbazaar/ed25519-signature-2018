@@ -1,5 +1,10 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
+## 4.1.0 - 2024-10-dd
+
+### Changed
+- Update dependencies.
+
 ## 4.0.0 - 2022-10-25
 
 ### Changed
