@@ -1,8 +1,8 @@
 # Ed25519Signature2018 suite _(@digitalbazaar/ed25519-signature-2018)_
 
-[![Build status](https://img.shields.io/github/workflow/status/digitalbazaar/ed25519-signature-2018/Node.js%20CI)](https://github.com/digitalbazaar/ed25519-signature-2018/actions?query=workflow%3A%22Node.js+CI%22)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/digitalbazaar/ed25519-signature-2018/main.yml)](https://github.com/digitalbazaar/ed25519-signature-2018/actions/workflow/main.yml)
 [![Coverage status](https://img.shields.io/codecov/c/github/digitalbazaar/ed25519-signature-2018)](https://codecov.io/gh/digitalbazaar/ed25519-signature-2018)
-[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/ed25519-signature-2018.svg)](https://npm.im/digitalbazaar/ed25519-signature-2018)
+[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/ed25519-signature-2018.svg)](https://npm.im/@digitalbazaar/ed25519-signature-2018)
 
 > Ed25519Signature2018 Linked Data Proof suite for use with jsonld-signatures.
 
