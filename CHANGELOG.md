@@ -1,6 +1,6 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
-## 4.2.0 - 2026-02-xx
+## 4.2.0 - 2026-02-05
 
 ### Changed
 - Align `README.md`, `package.json`, and testing with reality that Node.js 18+
