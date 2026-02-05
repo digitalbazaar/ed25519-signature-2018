@@ -5,6 +5,11 @@
 ### Changed
 - Align `README.md`, `package.json`, and testing with reality that Node.js 18+
   is required.
+- Update dependencies:
+  - `jsonld@9`.
+    - Only used for utility functions that had no changes.
+- Update dev dependencies:
+  - `jsonld-signatures@11.6.0`.
 
 ## 4.1.0 - 2024-10-15
 
