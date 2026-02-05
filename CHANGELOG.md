@@ -1,5 +1,11 @@
 # @digitalbazaar/ed25519-signature-2018 Changelog
 
+## 4.2.0 - 2026-02-xx
+
+### Changed
+- Align `README.md`, `package.json`, and testing with reality that Node.js 18+
+  is required.
+
 ## 4.1.0 - 2024-10-15
 
 ### Changed
